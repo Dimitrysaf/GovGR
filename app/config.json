@@ -1,9 +1,0 @@
-{
-    "serviceName": "",
-    "plugins": {
-      "govuk-frontend": {
-        "rebrand": true
-      }
-    }
-  }
-  

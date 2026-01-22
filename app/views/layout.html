@@ -13,13 +13,25 @@ GOV.GR - Ψηφιακές Υπηρεσίες
 
 {% block head %}
 <link href="/assets/app.css" rel="stylesheet">
+<style>
+  .hero-banner {
+    width: 100%;
+    background-color: #1d70b8;
+    padding: 40px 0 60px 0;
+  }
+  
+  .hero-banner h1,
+  .hero-banner .govuk-label {
+    color: white;
+  }
+</style>
 {% endblock %}
 
 {% block header %}
 <header class="govuk-header" role="banner" data-module="govuk-header">
     <div class="govuk-header__container govuk-width-container">
         <div class="govuk-header__logo">
-            <a href="https://www.gov.gr" class="govuk-header__homepage-link">
+            <a href="https://gov.gr" class="govuk-header__homepage-link">
                 {{ govukLogo({
                 ariaLabelText: "GOV.GR",
                 useLogotype: true
@@ -28,6 +40,17 @@ GOV.GR - Ψηφιακές Υπηρεσίες
         </div>
     </div>
 </header>
+
+{% if showHeroBanner %}
+  <div class="hero-banner">
+    <div class="govuk-width-container">
+      {% block heroBanner %}{% endblock %}
+    </div>
+  </div>
+{% endif %}
+{% endblock %}
+
+{% block content %}
 {% endblock %}
 
 {% block footer %}

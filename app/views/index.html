@@ -1,18 +1,120 @@
 {% extends "layout.html" %}
 
-{% block content %}
+{% set showHeroBanner = true %}
+
+{% block head %}
+  {{ super() }}
+  <style>
+    .govuk-input__wrapper {
+      display: flex;
+    }
+    
+    .govuk-input__wrapper .govuk-input {
+      border-right: 0;
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+    }
+    
+    .search-button {
+      width: 50px;
+      min-width: 50px;
+      flex-shrink: 0;
+      padding: 0;
+      margin: 0;
+      border: 2px solid #0b0c0c;
+      border-left: 0;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+      background-color: #f3f2f1;
+      color: #0b0c0c;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: inherit;
+      font-size: 19px;
+      font-weight: 400;
+      line-height: 1;
+      box-sizing: border-box;
+    }
+    
+    .search-button:hover {
+      background-color: #dbdad9;
+    }
+    
+    .search-button:focus {
+      outline: 3px solid #ffdd00;
+      outline-offset: 0;
+      background-color: #ffdd00;
+      box-shadow: inset 0 0 0 1px #ffdd00;
+    }
+    
+    .search-icon {
+      width: 20px;
+      height: 20px;
+    }
+    
+    /* Responsive input widths */
+    @media (min-width: 641px) {
+      .search-input-responsive {
+        max-width: 30em;
+      }
+    }
+    
+    @media (max-width: 640px) {
+      .search-input-responsive {
+        max-width: 100%;
+      }
+    }
+  </style>
+{% endblock %}
+
+{% block heroBanner %}
   <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
-      <h1 class="govuk-heading-l">Καλώς ήρθατε στο Gov.gr</h1>
       
-      <p class="govuk-body">
-        Το σύστημα βρήκε επιτυχώς τα macros μέσω του layout.
-      </p>
-
-      {{ govukButton({
-        text: "Ξεκινήστε τώρα",
-        isStartButton: true
-      }) }}
+      <h1 class="govuk-heading-xl">
+        Ο καλύτερος τρόπος για να βρείτε κυβερνητικές υπηρεσίες και πληροφορίες
+      </h1>
+      
+      <form action="/search" method="get" role="search">
+        <div class="govuk-form-group">
+          <label class="govuk-label govuk-label--s" for="search-input" style="color: white;">
+            Αναζήτηση
+          </label>
+          <div class="govuk-input__wrapper">
+            <input class="govuk-input search-input-responsive" id="search-input" name="keywords" type="search" spellcheck="false">
+            <button class="search-button" type="submit" aria-label="Αναζήτηση">
+              <svg class="search-icon" viewBox="0 0 27 27" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+                <circle cx="12.0161" cy="11.0161" r="8.51613" stroke="currentColor" stroke-width="3"></circle>
+                <line x1="17.8668" y1="17.3587" x2="26.4475" y2="25.9393" stroke="currentColor" stroke-width="3"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </form>
+      
     </div>
+  </div>
+{% endblock %}
+
+{% block content %}
+  <div class="govuk-width-container">
+    <main class="govuk-main-wrapper">
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+          <h2 class="govuk-heading-l">Καλώς ήρθατε στο GOV.GR</h2>
+          <p class="govuk-body">
+            Βρείτε τη δημόσια υπηρεσία που θέλετε εύκολα και γρήγορα.
+          </p>
+          <a href="/services" role="button" draggable="false" class="govuk-button govuk-button--start" data-module="govuk-button">
+            Ξεκινήστε τώρα
+            <svg class="govuk-button__start-icon" xmlns="http://www.w3.org/2000/svg" width="17.5" height="19" viewBox="0 0 33 40" aria-hidden="true" focusable="false">
+              <path fill="currentColor" d="M0 0h13l20 20-20 20H0l20-20z"></path>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </main>
   </div>
 {% endblock %}
