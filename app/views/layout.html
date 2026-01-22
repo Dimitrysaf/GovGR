@@ -1,5 +1,7 @@
 {% extends "govuk/template.njk" %}
 
+{% set govukRebrand = true %}
+
 {% from "govuk/components/header/macro.njk" import govukHeader %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/footer/macro.njk" import govukFooter %}
@@ -12,7 +14,6 @@
 {% block header %}
   {{ govukHeader({
     homepageUrl: "https://www.gov.gr",
-    serviceName: serviceName | default("Ψηφιακές Υπηρεσίες"),
     containerClasses: "govuk-width-container",
     rebrand: true
   }) }}
