@@ -1,0 +1,23 @@
+{% extends "govuk/template.njk" %}
+
+{% from "govuk/components/header/macro.njk" import govukHeader %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+{% from "govuk/components/footer/macro.njk" import govukFooter %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+
+{% block head %}
+  <link href="/assets/app.css" rel="stylesheet">
+{% endblock %}
+
+{% block header %}
+  {{ govukHeader({
+    homepageUrl: "https://www.gov.gr",
+    serviceName: serviceName | default("Ψηφιακές Υπηρεσίες"),
+    containerClasses: "govuk-width-container",
+    rebrand: true
+  }) }}
+{% endblock %}
+
+{% block footer %}
+  {{ govukFooter({}) }}
+{% endblock %}

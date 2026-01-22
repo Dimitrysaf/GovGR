@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block content %}
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+      <h1 class="govuk-heading-l">Καλώς ήρθατε στο Gov.gr</h1>
+      
+      <p class="govuk-body">
+        Το σύστημα βρήκε επιτυχώς τα macros μέσω του layout.
+      </p>
+
+      {{ govukButton({
+        text: "Ξεκινήστε τώρα",
+        isStartButton: true
+      }) }}
+    </div>
+  </div>
+{% endblock %}

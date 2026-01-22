@@ -1,0 +1,27 @@
+{
+  "name": "govgr",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:sass": "sass app/assets/sass/app.scss public/app.css --load-path=node_modules/govuk-frontend/dist --quiet-deps",
+    "watch:sass": "sass app/assets/sass/app.scss public/app.css --load-path=node_modules/govuk-frontend/dist --quiet-deps --watch",
+    "start": "node server.js",
+    "dev": "concurrently \"npm run watch:sass\" \"nodemon server.js\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1",
+    "govuk-frontend": "^5.14.0",
+    "nunjucks": "^3.2.4",
+    "sass": "^1.97.3"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "nodemon": "^3.1.11"
+  }
+}
