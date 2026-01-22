@@ -6,24 +6,22 @@ const app = express()
 const port = process.env.PORT || 3000
 
 // 1. Configure Nunjucks
-// We tell it to look in our 'app/views' AND the govuk-frontend components folder
 nunjucks.configure([
   path.join(__dirname, 'app/views'),
+  path.join(__dirname, 'app/assets/images'),
   path.join(__dirname, 'node_modules/govuk-frontend/dist')
 ], {
   autoescape: true,
   express: app,
-  noCache: true, // Useful for development
-  watch: true    // Reload templates when they change
+  noCache: true,
+  watch: true
 })
 
 app.set('view engine', 'html')
 
 // 2. Serve Static Assets
-// Serve your compiled CSS from /public
 app.use('/assets', express.static(path.join(__dirname, 'public')))
-
-// Serve GOV.UK's own assets (images, fonts)
+app.use('/assets/images', express.static(path.join(__dirname, 'app/assets/images'))) // ADD THIS
 app.use('/assets/govuk', express.static(path.join(__dirname, 'node_modules/govuk-frontend/dist/govuk/assets')))
 
 // 3. Routes

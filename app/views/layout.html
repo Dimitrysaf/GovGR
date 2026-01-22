@@ -2,23 +2,34 @@
 
 {% set govukRebrand = true %}
 
-{% from "govuk/components/header/macro.njk" import govukHeader %}
+{% from "logo.njk" import govukLogo %}
 {% from "govuk/components/button/macro.njk" import govukButton %}
 {% from "govuk/components/footer/macro.njk" import govukFooter %}
 {% from "govuk/components/input/macro.njk" import govukInput %}
 
+{% block pageTitle %}
+GOV.GR - Ψηφιακές Υπηρεσίες
+{% endblock %}
+
 {% block head %}
-  <link href="/assets/app.css" rel="stylesheet">
+<link href="/assets/app.css" rel="stylesheet">
 {% endblock %}
 
 {% block header %}
-  {{ govukHeader({
-    homepageUrl: "https://www.gov.gr",
-    containerClasses: "govuk-width-container",
-    rebrand: true
-  }) }}
+<header class="govuk-header" role="banner" data-module="govuk-header">
+    <div class="govuk-header__container govuk-width-container">
+        <div class="govuk-header__logo">
+            <a href="https://www.gov.gr" class="govuk-header__homepage-link">
+                {{ govukLogo({
+                ariaLabelText: "GOV.GR",
+                useLogotype: true
+                }) }}
+            </a>
+        </div>
+    </div>
+</header>
 {% endblock %}
 
 {% block footer %}
-  {{ govukFooter({}) }}
+{{ govukFooter({}) }}
 {% endblock %}

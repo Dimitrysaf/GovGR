@@ -1,25 +1,9 @@
-{#- This macro is for interal use within GOV.UK Frontend. It isn't intended for
-external use and may receive undocumented breaking changes in non-breaking
-releases of Frontend. #}
-
-{% from "./attributes.njk" import govukAttributes %}
-
 {% macro govukLogo(params) %}
-  {#- Default options #}
-  {%- set useLogotype = params.useLogotype | default(true) %}
-
-  {#- Calculate how wide the logo needs to be for the given parameters.
-      The new SVG ViewBox is '0 0 323.9 60'.
-      The height is fixed at 30px (display), which is 0.5x the ViewBox height (60).
-      Therefore, display width = ViewBox Width / 2.
-  #}
-  {%- set svgWidth = 36 %} {# Crown only (approximate crop of the left side) #}
-  {%- set svgWidth = 162 if useLogotype else svgWidth %} {# Full Logo (323.9 / 2) #}
-
-  {#-
-    The SVG content is split into the Crown and the Logotype text.
-    Both share the root coordinate transform matrix from the source SVG.
-  #}
+  {%- set useLogotype = params.useLogotype if params.useLogotype is defined else true %}
+  {%- set svgWidth = 162 if useLogotype else 36 %}
+  {%- set ariaLabel = params.ariaLabelText if params.ariaLabelText else "" %}
+  {%- set classes = params.classes if params.classes else "" %}
+  
   {%- set _tudorCrown %}
     <g transform="matrix(.0629 0 0 .06606 1660.447998 -33.511482)" style="transform-origin:-1628.82px 9.71029px">
       <g transform="matrix(1.895028 0 0 1.818227 -2147.4856861 371.2117424)">
@@ -55,29 +39,21 @@ releases of Frontend. #}
     </g>
   {%- endset %}
 
-  {#- The SVG needs `focusable="false"` so that Internet Explorer does not treat
-  it as an interactive element - without this it will be 'focusable' when using
-  the keyboard to navigate. #}
   <svg
     focusable="false"
-    role="{{ "img" if params.ariaLabelText else "presentation" }}"
+    role="{{ 'img' if ariaLabel else 'presentation' }}"
     xmlns="http://www.w3.org/2000/svg"
-    {#- The viewbox is tailored to the provided SVG asset logic.
-        Full logo: 0 0 323.9 60
-        Crown only (cropped): 0 0 72 60 (Approximate logic to hide text space)
-    #}
     viewBox="{{ '0 0 323.9 60' if useLogotype else '0 0 72 60' }}"
     height="30"
     width="{{ svgWidth }}"
     fill="currentColor"
-    {%- if params.classes %} class="{{ params.classes }}"{% endif %}
-    {%- if params.ariaLabelText %} aria-label="{{ params.ariaLabelText }}"{% endif %}
-    {{- govukAttributes(params.attributes) }}
+    {% if classes %}class="{{ classes }}"{% endif %}
+    {% if ariaLabel %}aria-label="{{ ariaLabel }}"{% endif %}
   >
-    {%- if params.ariaLabelText %}<title>{{ params.ariaLabelText }}</title>{% endif %}
-    {{ _tudorCrown | safe | trim | indent(2) }}
+    {% if ariaLabel %}<title>{{ ariaLabel }}</title>{% endif %}
+    {{ _tudorCrown | safe }}
     {% if useLogotype %}
-      {{ _logotype | safe | trim | indent(2) }}
+      {{ _logotype | safe }}
     {% endif %}
   </svg>
 {% endmacro %}
