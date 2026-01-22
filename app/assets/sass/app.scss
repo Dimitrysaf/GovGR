@@ -1,5 +1,94 @@
-@use "govuk/index" with (
-    $govuk-font-family: ("Roboto", "Helvetica", "Arial", sans-serif),
-    $govuk-assets-path: "../assets",
-    $govuk-include-default-font-face: false
-  );
+@use "govuk/index";
+
+// Override with official GOV.GR color palette
+:root {
+  // Brand colours
+  --_govuk-brand-colour: #003375;
+  --color-primary: #003375;
+  --color-secondary: #00b0f0;
+  
+  // Status colours
+  --color-success: #006736;
+  --color-success-hover: #154a2b;
+  --color-error: #b60202;
+  --color-error-hover: #880000;
+  --color-focus: #ffdd00;
+  
+  // Typography colours
+  --color-base-content: #24282f;
+  --color-gray-800: #515058;
+  --color-link: #0054ba;
+  --color-link-hover: #0e3d8b;
+  --color-link-visited: #4c2a90;
+  --color-link-active: #24282f;
+  
+  // Grayscale
+  --color-white: #fefefe;
+  --color-base-100: #fefefe;
+  --color-base-200: #ecebec;
+  --color-base-300: #cdccce;
+  --color-black: #000000;
+}
+
+// Apply GOV.GR colors to GOV.UK components
+.govuk-header {
+  background-color: var(--color-primary);
+  border-bottom: 2px solid var(--color-secondary);
+}
+
+.govuk-link {
+  color: var(--color-link);
+  
+  &:visited {
+    color: var(--color-link-visited);
+  }
+  
+  &:hover {
+    color: var(--color-link-hover);
+  }
+  
+  &:active {
+    color: var(--color-link-active);
+  }
+}
+
+.govuk-button--start {
+  background-color: var(--color-success);
+  box-shadow: 0 2px 0 var(--color-success-hover);
+  
+  &:hover {
+    background-color: var(--color-success-hover);
+  }
+}
+
+.govuk-hero-banner {
+  background-color: var(--color-primary);
+}
+
+.govuk-input:focus,
+.govuk-textarea:focus,
+.govuk-select:focus,
+.govuk-button:focus,
+.search-button:focus {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 0;
+}
+
+.govuk-error-message {
+  color: var(--color-error);
+}
+
+.govuk-form-group--error .govuk-input {
+  border-color: var(--color-error);
+}
+
+// Body text
+body {
+  color: var(--color-base-content);
+}
+
+// Secondary/hint text
+.govuk-hint,
+.govuk-label--s {
+  color: var(--color-gray-800);
+}
